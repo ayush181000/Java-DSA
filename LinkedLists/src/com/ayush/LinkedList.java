@@ -13,19 +13,32 @@ public class LinkedList {
     }
 
     public static void main(String[] args) {
+//        LinkedList llist = new LinkedList();
+//
+//        llist.head = new Node(1);
+//        Node second = new Node(2);
+//        Node third = new Node(3);
+//
+//        llist.head.next = second;
+//        second.next = third;
+//        llist.push(6);
+//        llist.printList();
+
         LinkedList llist = new LinkedList();
 
-        llist.head = new Node(1);
-        Node second = new Node(2);
-        Node third = new Node(3);
+        llist.push(7);
+        llist.push(1);
+        llist.push(3);
+        llist.push(2);
+        llist.push(8);
 
-        llist.head.next = second;
-        second.next = third;
-        llist.push(6);
+        System.out.println("\nCreated Linked list is: ");
         llist.printList();
 
+        llist.deleteNodePosition(4); // Delete node at position 4
 
-
+        System.out.println("\nLinked List after Deletion at position 4: ");
+        llist.printList();
     }
 
     public void printList() {
@@ -89,22 +102,83 @@ public class LinkedList {
     }
 
     public void deleteNode(int key) {
+        // store head node
         Node temp = head, prev = null;
 
+        // if head node itself holds the key to be deleted
         if ((temp != null) && (temp.data == key)) {
             head = temp.next;
             return;
         }
 
+        // Search for the key to be deleted, keep track of
+        // the previous node as we need to change temp.next
         while (temp != null && temp.data != key) {
             prev = temp;
             temp = temp.next;
         }
 
+        // If key was not present in linked list
         if (temp == null) {
             return;
         }
 
+        // Unlink the node from linked list
         prev.next = temp.next;
+    }
+
+    void deleteNodePosition(int position) {
+
+        // If linked list is empty
+        if (head == null) {
+            System.out.println("Empty linked list");
+        }
+
+        // Store head node
+        Node temp = head;
+
+        // If head needs to be removed
+        if (position == 0) {
+            head = head.next;   // Change head
+            return;
+        }
+
+        int i = 0;
+        Node prev = null;
+        while (temp.next != null && position != i) {
+            prev = temp;
+            temp = temp.next;
+            i++;
+        }
+
+        prev.next = temp.next;
+
+    }
+
+    void deleteNodePositionAlternative(int position) {
+        // If linked list is empty
+        if (head == null) return;
+
+        // Store head node
+        Node temp = head;
+
+        // If head needs to be removed
+        if (position == 0) {
+            head = temp.next; // Change head
+            return;
+        }
+
+        // Find previous node of the node to be deleted
+        for (int i = 0; temp != null && i < position - 1; i++)
+            temp = temp.next;
+
+        // If position is more than number of nodes
+        if (temp == null || temp.next == null) return;
+
+        // Node temp->next is the node to be deleted
+        // Store pointer to the next of node to be deleted
+        Node next = temp.next.next;
+
+        temp.next = next; // Unlink the deleted node from list
     }
 }

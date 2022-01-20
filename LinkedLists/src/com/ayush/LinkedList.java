@@ -39,6 +39,12 @@ public class LinkedList {
 
         System.out.println("\nLinked List after Deletion at position 4: ");
         llist.printList();
+
+        // recursive count
+        System.out.println("Count of nodes is " + llist.getCountRec(llist.head));
+
+        // iterative count
+        System.out.println("Count of nodes is " + llist.getCount());
     }
 
     public void printList() {
@@ -180,5 +186,29 @@ public class LinkedList {
         Node next = temp.next.next;
 
         temp.next = next; // Unlink the deleted node from list
+    }
+
+    void deleteList() {
+        // automatically deletes the whole list because of java garbage collector
+        head = null;
+    }
+
+    int getCount() {
+        Node temp = head;
+        int count = 0;
+
+        while (temp != null) {
+            count++;
+            temp = temp.next;
+        }
+        return count;
+    }
+
+    int getCountRec(Node node) {
+        if (node == null) {
+            return 0;
+        } else {
+            return 1 + getCountRec(node.next);
+        }
     }
 }

@@ -211,4 +211,31 @@ public class LinkedList {
             return 1 + getCountRec(node.next);
         }
     }
+
+    boolean search(Node head, int x) {
+        Node temp = head;   //Initialize current or temp
+        while (temp != null) {
+            if (temp.data == x) {
+                return true;    //data found
+            }
+            temp = temp.next;
+        }
+        return false;   //data not found
+    }
+
+    boolean searchRec(Node head, int x) {
+        // Base case
+        if (head == null) {
+            return false;
+        }
+
+        // If key is present in current node,
+        // return true
+        if (head.data == x) {
+            return true;
+        }
+
+        // Recur for remaining list
+        return searchRec(head.next, x);
+    }
 }

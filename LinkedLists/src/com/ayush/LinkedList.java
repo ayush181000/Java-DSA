@@ -45,6 +45,12 @@ public class LinkedList {
 
         // iterative count
         System.out.println("Count of nodes is " + llist.getCount());
+
+        /* Check the count function recursive */
+        System.out.printf("\nElement at index 3 is %d", llist.getNthRec(llist.head, 3));
+
+        /* Check the count function iterative */
+        System.out.printf("\nElement at index 2 is %d", llist.getNth(2));
     }
 
     public void printList() {
@@ -237,5 +243,37 @@ public class LinkedList {
 
         // Recur for remaining list
         return searchRec(head.next, x);
+    }
+
+    int getNth(int index) {
+        if (head == null) {
+            return -1;
+        }
+
+        Node temp = head;
+        int count = 0;
+
+        while (temp != null) {
+            if (count == index) {
+                return temp.data;
+            }
+            temp = temp.next;
+            count++;
+        }
+
+        /* if we get to this line, the caller was asking
+        for a non-existent element so we assert fail */
+        assert (false);
+        return 0;
+    }
+
+    int getNthRec(Node head, int index) {
+        int count = 0;
+        if (head == null) {
+            return -1;
+        }
+        if (count == index) {
+            return head.data;
+        } else return getNthRec(head.next, index - 1);
     }
 }

@@ -56,6 +56,10 @@ public class LinkedList {
 
         llist.swapNodes(4, 3);
 
+//        llist.pairWiseSwap();
+
+//        llist.pairWiseSwapRec(llist.head);
+
         System.out.print("\n Linked list after calling swapNodes() \n");
         llist.printList();
     }
@@ -284,11 +288,9 @@ public class LinkedList {
         } else return getNthRec(head.next, index - 1);
     }
 
-    void swapNodes(int x, int y)
-    {
+    void swapNodes(int x, int y) {
         // Nothing to do if x and y are same
-        if (x == y)
-            return;
+        if (x == y) return;
 
         // Search for x (keep track of prevX and CurrX)
         Node prevX = null, currX = head;
@@ -305,18 +307,15 @@ public class LinkedList {
         }
 
         // If either x or y is not present, nothing to do
-        if (currX == null || currY == null)
-            return;
+        if (currX == null || currY == null) return;
 
         // If x is not head of linked list
-        if (prevX != null)
-            prevX.next = currY;
+        if (prevX != null) prevX.next = currY;
         else // make y the new head
             head = currY;
 
         // If y is not head of linked list
-        if (prevY != null)
-            prevY.next = currX;
+        if (prevY != null) prevY.next = currX;
         else // make x the new head
             head = currX;
 
@@ -324,5 +323,33 @@ public class LinkedList {
         Node temp = currX.next;
         currX.next = currY.next;
         currY.next = temp;
+    }
+
+    void pairWiseSwap() {
+        Node temp = head;
+
+        /* Traverse only till there are atleast 2 nodes left */
+        while (temp != null && temp.next != null) {
+
+            /* Swap the data */
+            int k = temp.data;
+            temp.data = temp.next.data;
+            temp.next.data = k;
+            temp = temp.next.next;
+        }
+    }
+
+    void pairWiseSwapRec(Node head) {
+        /* There must be at-least two nodes in the list */
+        if (head != null && head.next != null) {
+
+            /* Swap the node's data with data of next node */
+            int temp = head.data;
+            head.data = head.next.data;
+            head.next.data = temp;
+
+            /* Call pairWiseSwap() for rest of the list */
+            pairWiseSwapRec(head.next.next);
+        }
     }
 }

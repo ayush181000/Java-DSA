@@ -384,4 +384,27 @@ public class LinkedList {
         }
         return node;
     }
+
+    Node pairWiseSwapChangingLinksRec(Node node) {
+
+        // Base Case: The list is empty or has only one node
+        if (node == null || node.next == null) {
+            return node;
+        }
+
+        // Store head of list after two nodes
+        Node remaining = node.next.next;
+
+        // Change head
+        Node newHead = node.next;
+
+        // Change next of second node
+        node.next.next = node;
+
+        // Recur for remaining list and change next of head
+        node.next = pairWiseSwapChangingLinksRec(remaining);
+
+        // Return new head of modified list
+        return newHead;
+    }
 }

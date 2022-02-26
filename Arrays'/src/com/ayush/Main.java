@@ -1,0 +1,50 @@
+package com.ayush;
+
+public class Main {
+
+    public static void main(String[] args) {
+        int[] intArray = {1, 2, 3, 4, 5, 6, 7, 8};
+        rotateArray2(intArray, 2);
+
+        printArray(intArray);
+
+    }
+
+    public static void printArray(int[] array) {
+
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i] + " ");
+        }
+        System.out.println("");
+    }
+
+    public static void rotateArray1(int[] array, int d) {
+
+        // Using temp array
+        int[] temp = new int[array.length];
+        System.arraycopy(array, d, temp, 0, array.length - d);
+        System.arraycopy(array, 0, temp, array.length - d, d);
+
+    }
+
+    public static void rotateArray2(int[] array, int d) {
+
+        // By shifting elements one by one
+        for (int i = 0; i < d; i++) {
+            int temp = array[0];
+            int j;
+            for (j = 0; j < array.length - 1; j++) {
+                array[j] = array[j + 1];
+            }
+            array[j] = temp;
+        }
+
+    }
+
+    public static void rotateArray3(int[] array, int d) {
+
+        // Juggling algorithm
+        
+
+    }
+}

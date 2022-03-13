@@ -4,28 +4,34 @@ public class Pattern13 {
     public static void main(String[] args) {
 
         int n = 4;
-        int counter = 1;
-        for (int i = 1; i <= n; i++) {
-            for (int j = n - i; j > 0; j--) {
+        int currRow = 1;
+
+        while (currRow <= n) {
+
+            int spaces = 1;
+            while (spaces <= n - currRow) {
                 System.out.print(" ");
-            }
-            //////////////////////////////////
-
-            for (int j = i; j > i - 1; j--) {
-                System.out.print(j + " ");
+                spaces++;
             }
 
-            if (counter != 1)
-                System.out.print(counter + " ");
-
-            for (int j = 0; j < i - 1; j++) {
-                System.out.print(counter - i + " ");
+            int currCol = 1;
+            int valToPrint = currRow;
+            while (currCol <= currRow) {
+                System.out.print(valToPrint);
+                valToPrint++;
+                currCol++;
             }
 
-            ////////////
-            counter += 2;
+            currCol = 1;
+            valToPrint = 2 * currRow - 2;
+            while (currCol <= currRow - 1) {
+                System.out.print(valToPrint);
+                valToPrint -= 1;
+                currCol += 1;
+            }
 
             System.out.println();
+            currRow++;
         }
 
     }

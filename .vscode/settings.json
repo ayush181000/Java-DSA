@@ -1,8 +1,9 @@
 {
   "java.project.sourcePaths": [
+    "Strings",
     "Patterns/src",
     "Competitive Programming",
     "Arrays'/src/com/ayush",
-    "Strings"
+    "2D Arrays"
   ]
 }

@@ -1,11 +1,11 @@
-package com.ayush;
+// package com.ayush;
 
 import java.sql.Array;
 
 public class ProductOfArray {
 
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 4, 5};
+        int[] arr = { 1, 2, 3, 4, 5 };
 
         System.out.println(productOfArray(arr, arr.length));
     }

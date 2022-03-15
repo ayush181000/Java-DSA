@@ -1,15 +1,14 @@
-package com.ayush;
+// package com.ayush;
 
 public class Main {
 
     public static void main(String[] args) {
-        int[] intArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+        int[] intArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
         rotateArray3(intArray, 3);
 
         printArray(intArray);
 
     }
-
 
     /* ROTATION OF ARRAY */
     public static void rotateArray1(int[] array, int d) {
@@ -44,7 +43,6 @@ public class Main {
         int gcd = findGCD(n, d);
         System.out.println(gcd);
 
-
         for (int i = 0; i < gcd; i++) {
             int temp = array[i];
             j = i;
@@ -76,7 +74,8 @@ public class Main {
     }
 
     public static int findGCD(int a, int b) {
-        if (b == 0) return a;
+        if (b == 0)
+            return a;
 
         return findGCD(b, a % b);
     }

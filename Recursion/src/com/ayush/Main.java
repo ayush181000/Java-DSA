@@ -1,9 +1,9 @@
-package com.ayush;
+// package com.ayush;
 
 public class Main {
 
     public static void main(String[] args) {
-        
+
         System.out.println(recursiveFactorial(12));
         System.out.println(iterativeFactorial(10));
     }

@@ -1,4 +1,4 @@
-package com.ayush;
+// package com.ayush;
 
 public class GCD {
 

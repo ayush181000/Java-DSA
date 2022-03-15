@@ -1,4 +1,4 @@
-package com.ayush;
+// package com.ayush;
 
 import java.util.Scanner;
 
@@ -25,7 +25,7 @@ public class Solution {
                 arr[l] = arr[l - n];
             }
 
-//            printArray(arr);
+            // printArray(arr);
 
             int maxSoFar = arr[0];
             int maxEndingHere = 0;
@@ -43,7 +43,6 @@ public class Solution {
             }
 
             System.out.println(maxSoFar - arr[0] + " ");
-
 
         }
 

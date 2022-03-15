@@ -1,4 +1,4 @@
-package com.ayush;
+// package com.ayush;
 
 public class SumOfDigits {
 
@@ -15,6 +15,5 @@ public class SumOfDigits {
 
         return n % 10 + sumOfDigits(n / 10);
     }
-
 
 }

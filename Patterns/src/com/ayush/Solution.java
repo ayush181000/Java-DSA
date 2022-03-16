@@ -6,11 +6,10 @@ import java.util.Set;
 class Solution {
 
     public static void main(String[] args) {
-//        System.out.println(romanToInt("LVIII"));
-        System.out.println(removeDuplicates(new int[]{1, 1, 2}));
+        // System.out.println(romanToInt("LVIII"));
+        System.out.println(removeDuplicates(new int[] { 1, 1, 2 }));
 
     }
-
 
     public static int removeDuplicates(int[] nums) {
         Set<Integer> set = new HashSet();
@@ -30,35 +29,41 @@ class Solution {
                 value += 1;
             } else if (s.charAt(i) == 'V') {
                 value += 5;
-                if (i - 1 > 0) if (s.charAt(i - 1) == 'I') {
-                    value -= 2;
-                }
+                if (i - 1 > 0)
+                    if (s.charAt(i - 1) == 'I') {
+                        value -= 2;
+                    }
             } else if (s.charAt(i) == 'X') {
                 value += 10;
-                if (i - 1 > 0) if (s.charAt(i - 1) == 'I') {
-                    value -= 2;
-                }
+                if (i - 1 > 0)
+                    if (s.charAt(i - 1) == 'I') {
+                        value -= 2;
+                    }
             } else if (s.charAt(i) == 'L') {
                 value += 50;
 
-                if (i - 1 > 0) if (s.charAt(i - 1) == 'X') {
-                    value -= 20;
-                }
+                if (i - 1 > 0)
+                    if (s.charAt(i - 1) == 'X') {
+                        value -= 20;
+                    }
             } else if (s.charAt(i) == 'C') {
                 value += 100;
-                if (i - 1 > 0) if (s.charAt(i - 1) == 'X') {
-                    value -= 20;
-                }
+                if (i - 1 > 0)
+                    if (s.charAt(i - 1) == 'X') {
+                        value -= 20;
+                    }
             } else if (s.charAt(i) == 'D') {
                 value += 500;
-                if (i - 1 > 0) if (s.charAt(i - 1) == 'C') {
-                    value -= 200;
-                }
+                if (i - 1 > 0)
+                    if (s.charAt(i - 1) == 'C') {
+                        value -= 200;
+                    }
             } else if (s.charAt(i) == 'M') {
                 value += 1000;
-                if (i - 1 > 0) if (s.charAt(i - 1) == 'C') {
-                    value -= 200;
-                }
+                if (i - 1 > 0)
+                    if (s.charAt(i - 1) == 'C') {
+                        value -= 200;
+                    }
             }
         }
         return value;

@@ -1,10 +1,11 @@
 {
   "java.project.sourcePaths": [
     "Strings",
+    "Recursion/src/com/ayush",
     "Patterns/src",
     "Competitive Programming",
     "Arrays'/src/com/ayush",
     "2D Arrays",
-    "Recursion/src/com/ayush"
+    "BackTracking"
   ]
 }

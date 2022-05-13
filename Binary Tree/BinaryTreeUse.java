@@ -2,6 +2,40 @@ import java.util.Scanner;
 
 public class BinaryTreeUse {
 
+    public static int countNodesGreaterThanX(BinaryTreeNode<Integer> root, int x) {
+        if (root == null) {
+            return 0;
+        }
+
+        int count = root.data > x ? 1 : 0;
+
+        count += countNodesGreaterThanX(root.left, x);
+        count += countNodesGreaterThanX(root.right, x);
+
+        return count;
+
+    }
+
+    public static int largestNode(BinaryTreeNode<Integer> root) {
+        if (root == null) {
+            return -1;
+        }
+
+        int leftLargest = largestNode(root.left);
+        int rightLargest = largestNode(root.right);
+
+        return Math.max(root.data, Math.max(leftLargest, rightLargest));
+
+    }
+
+    public static int numberOfNodes(BinaryTreeNode<Integer> root) {
+        if (root == null) {
+            return 0;
+        }
+
+        return numberOfNodes(root.left) + numberOfNodes(root.right) + 1;
+    }
+
     public static BinaryTreeNode<Integer> takeTreeInputBetter(boolean isRoot, int parentData, boolean isLeft) {
         if (isRoot) {
             System.out.println("Enter root data : ");
@@ -79,7 +113,18 @@ public class BinaryTreeUse {
 
         BinaryTreeNode<Integer> root = takeTreeInputBetter(true, 0, true);
 
+        System.out.println("Tree : ");
         printTree(root);
+        System.out.println("___________________ ");
+
+        System.out.println("Number of nodes : ");
+        System.out.println(numberOfNodes(root));
+
+        System.out.println("Largest node in tree : ");
+        System.out.println(largestNode(root));
+
+        System.out.println("Number of nodes greater than x");
+        System.out.println(countNodesGreaterThanX(root, 20));
 
     }
 }

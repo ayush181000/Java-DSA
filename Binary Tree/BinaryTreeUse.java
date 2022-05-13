@@ -2,6 +2,44 @@ import java.util.Scanner;
 
 public class BinaryTreeUse {
 
+    public static void changeToDepthTreeHelper(BinaryTreeNode<Integer> root, int level) {
+        if (root == null) {
+            return;
+        }
+
+        root.data = level;
+
+        changeToDepthTreeHelper(root.left, level + 1);
+        changeToDepthTreeHelper(root.right, level + 1);
+    }
+
+    public static void changeToDepthTree(BinaryTreeNode<Integer> root) {
+        changeToDepthTreeHelper(root, 0);
+    }
+
+    public static int numberOfLeaves(BinaryTreeNode<Integer> root) {
+        if (root == null) {
+            return 0;
+        }
+
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+
+        return numberOfLeaves(root.left) + numberOfLeaves(root.right);
+    }
+
+    public static int heightTree(BinaryTreeNode<Integer> root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int leftHeight = heightTree(root.left);
+        int rightHeight = heightTree(root.right);
+
+        return 1 + Math.max(leftHeight, rightHeight);
+    }
+
     public static int countNodesGreaterThanX(BinaryTreeNode<Integer> root, int x) {
         if (root == null) {
             return 0;
@@ -102,6 +140,20 @@ public class BinaryTreeUse {
         printTree(root.right);
     }
 
+    public static void printTreeAtDepthK(BinaryTreeNode<Integer> root, int k) {
+        if (root == null) {
+            return;
+        }
+
+        if (k == 0) {
+            System.out.println(root.data);
+            return;
+        }
+
+        printTreeAtDepthK(root.left, k - 1);
+        printTreeAtDepthK(root.right, k - 1);
+    }
+
     public static void main(String[] args) {
         // BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(1);
 
@@ -117,14 +169,24 @@ public class BinaryTreeUse {
         printTree(root);
         System.out.println("___________________ ");
 
-        System.out.println("Number of nodes : ");
-        System.out.println(numberOfNodes(root));
+        System.out.println("Number of nodes : " + numberOfNodes(root));
 
-        System.out.println("Largest node in tree : ");
-        System.out.println(largestNode(root));
+        System.out.println("Largest node in tree : " + largestNode(root));
 
-        System.out.println("Number of nodes greater than x");
-        System.out.println(countNodesGreaterThanX(root, 20));
+        System.out.println("Number of nodes greater than x" + countNodesGreaterThanX(root, 20));
+
+        System.out.println("Height of tree" + heightTree(root));
+
+        System.out.println("Number of leaves" + numberOfLeaves(root));
+
+        System.out.println("Tree printed at level K");
+        printTreeAtDepthK(root, 2);
+
+        //
+        changeToDepthTree(root);
+        System.out.println("Tree : ");
+        printTree(root);
+        System.out.println("___________________ ");
 
     }
 }

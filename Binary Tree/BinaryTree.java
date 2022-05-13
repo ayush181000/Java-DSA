@@ -1,5 +1,3 @@
-// Java program for different tree traversals
-
 /* Class containing left and right child of current
 node and key value*/
 class Node {
@@ -79,6 +77,14 @@ class BinaryTree {
 
     void printPreorder() {
         printPreorder(root);
+    }
+
+    int height(Node node) {
+        if (node == null) {
+            return 0;
+        }
+
+        return Math.max(height(node.right), height(node.left)) + 1;
     }
 
     // Driver method

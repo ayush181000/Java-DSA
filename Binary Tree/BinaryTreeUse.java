@@ -154,6 +154,53 @@ public class BinaryTreeUse {
         printTreeAtDepthK(root.right, k - 1);
     }
 
+    public static BinaryTreeNode<Integer> removeLeafNodes(BinaryTreeNode<Integer> root) {
+        if (root == null) {
+            return null;
+        }
+
+        if (root.left == null && root.right == null) {
+            return null;
+        }
+
+        root.left = removeLeafNodes(root.left);
+        root.right = removeLeafNodes(root.right);
+
+        return root;
+    }
+
+    public static void mirrorTree(BinaryTreeNode<Integer> root) {
+        if (root == null) {
+            return;
+        }
+
+        mirrorTree(root.left);
+        mirrorTree(root.right);
+
+        BinaryTreeNode<Integer> temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+    }
+
+    public static boolean isBalanced(BinaryTreeNode<Integer> root) {
+        if (root == null) {
+            return true;
+        }
+
+        int leftHeight = heightTree(root);
+        int rightHeight = heightTree(root);
+
+        if (Math.abs(leftHeight - rightHeight) > 1) {
+            return false;
+        }
+
+        boolean isLeftBalanced = isBalanced(root.left);
+        boolean isRightBalanced = isBalanced(root.right);
+
+        return isLeftBalanced && isRightBalanced;
+
+    }
+
     public static void main(String[] args) {
         // BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(1);
 
@@ -179,14 +226,21 @@ public class BinaryTreeUse {
 
         System.out.println("Number of leaves" + numberOfLeaves(root));
 
-        System.out.println("Tree printed at level K");
-        printTreeAtDepthK(root, 2);
+        // System.out.println("Tree printed at level K");
+        // printTreeAtDepthK(root, 2);
 
         //
-        changeToDepthTree(root);
+        // changeToDepthTree(root);
+
+        // BinaryTreeNode<Integer> newRoot = removeLeafNodes(root);
+
+        // mirrorTree(root);
+
+        System.out.println("Is Balanced : " + isBalanced(root));
         System.out.println("Tree : ");
         printTree(root);
         System.out.println("___________________ ");
 
     }
 }
+// 1 2 3 4 5 6 7 -1 -1 -1 -1 8 9 -1 -1 -1 -1 -1 -1

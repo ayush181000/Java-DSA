@@ -291,6 +291,41 @@ public class BinaryTreeUse {
         return root;
     }
 
+    public static void printLevelWise(BinaryTreeNode<Integer> root) {
+        Queue<BinaryTreeNode<Integer>> pendingNode = new LinkedList<BinaryTreeNode<Integer>>();
+        pendingNode.add(root);
+
+        while (!pendingNode.isEmpty()) {
+            BinaryTreeNode<Integer> frontNode = pendingNode.poll();
+
+            if (frontNode == null) {
+                System.out.println();
+
+                if (!pendingNode.isEmpty()) {
+                    pendingNode.add(null);
+                }
+            } else {
+                System.out.println(frontNode.data + ":L:");
+
+                if (frontNode.left != null) {
+                    pendingNode.add(frontNode.left);
+                    System.out.println(frontNode.left.data + ",R:");
+                } else {
+                    System.out.println(-1 + ",R:");
+                }
+
+                if (frontNode.right != null) {
+                    pendingNode.add(frontNode.right);
+                    System.out.println(frontNode.right.data + ",R:");
+                } else {
+                    System.out.println(-1 + ",R:");
+                }
+            }
+        }
+    }
+
+    // TODO: diameter not working
+
     public static void main(String[] args) {
         // BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(1);
 
@@ -311,7 +346,8 @@ public class BinaryTreeUse {
         BinaryTreeNode<Integer> root = takeInputLevelWise();
 
         System.out.println("Tree : ");
-        printTree(root);
+        // printTree(root);
+        printLevelWise(root);
         System.out.println("___________________ ");
 
         System.out.println("Number of nodes : " + numberOfNodes(root));

@@ -187,8 +187,8 @@ public class BinaryTreeUse {
             return true;
         }
 
-        int leftHeight = heightTree(root);
-        int rightHeight = heightTree(root);
+        int leftHeight = heightTree(root.left);
+        int rightHeight = heightTree(root.right);
 
         if (Math.abs(leftHeight - rightHeight) > 1) {
             return false;
@@ -199,6 +199,28 @@ public class BinaryTreeUse {
 
         return isLeftBalanced && isRightBalanced;
 
+    }
+
+    public static BalanceTreeReturn isBalancedBetter(BinaryTreeNode<Integer> root) {
+        if (root == null) {
+            return new BalanceTreeReturn(0, true);
+        }
+
+        BalanceTreeReturn leftOutput = isBalancedBetter(root.left);
+        BalanceTreeReturn rightOutput = isBalancedBetter(root.right);
+
+        boolean isBal = true;
+        int height = 1 + Math.max(leftOutput.height, rightOutput.height);
+
+        if (Math.abs(leftOutput.height - rightOutput.height) > 1) {
+            isBal = false;
+        }
+
+        if (!leftOutput.isBalanced || !rightOutput.isBalanced) {
+            isBal = false;
+        }
+
+        return new BalanceTreeReturn(height, isBal);
     }
 
     public static void main(String[] args) {

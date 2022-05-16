@@ -1,4 +1,6 @@
+import java.util.Queue;
 import java.util.Scanner;
+import java.util.LinkedList;
 
 public class BinaryTreeUse {
 
@@ -252,6 +254,43 @@ public class BinaryTreeUse {
         return pair.diameter;
     }
 
+    public static BinaryTreeNode<Integer> takeInputLevelWise() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Enter root data : ");
+        int rootData = s.nextInt();
+
+        if (rootData == -1) {
+            return null;
+        }
+
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(rootData);
+        Queue<BinaryTreeNode<Integer>> pendingChildren = new LinkedList<BinaryTreeNode<Integer>>();
+        pendingChildren.add(root);
+
+        while (!pendingChildren.isEmpty()) {
+            BinaryTreeNode<Integer> front = pendingChildren.poll();
+
+            System.out.println("Enter left child of " + front.data);
+            int left = s.nextInt();
+            if (left != -1) {
+                BinaryTreeNode<Integer> leftChild = new BinaryTreeNode<Integer>(left);
+                front.left = leftChild;
+                pendingChildren.add(leftChild);
+            }
+
+            System.out.println("Enter right child of " + front.data);
+            int right = s.nextInt();
+            if (right != -1) {
+                BinaryTreeNode<Integer> rightChild = new BinaryTreeNode<Integer>(right);
+                front.right = rightChild;
+                pendingChildren.add(rightChild);
+            }
+
+        }
+
+        return root;
+    }
+
     public static void main(String[] args) {
         // BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(1);
 
@@ -261,7 +300,15 @@ public class BinaryTreeUse {
         // root.left = rootLeft;
         // root.right = rootRight;
 
-        BinaryTreeNode<Integer> root = takeTreeInputBetter(true, 0, true);
+        /**
+         * recursion input
+         */
+        // BinaryTreeNode<Integer> root = takeTreeInputBetter(true, 0, true);
+
+        /**
+         * level wise input
+         */
+        BinaryTreeNode<Integer> root = takeInputLevelWise();
 
         System.out.println("Tree : ");
         printTree(root);

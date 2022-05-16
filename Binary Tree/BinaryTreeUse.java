@@ -223,6 +223,35 @@ public class BinaryTreeUse {
         return new BalanceTreeReturn(height, isBal);
     }
 
+    public static Pair diameterHelper(BinaryTreeNode<Integer> root) {
+        if (root == null) {
+            return new Pair(0, 0);
+        }
+
+        Pair leftPair = diameterHelper(root.left);
+        Pair rightPair = diameterHelper(root.right);
+
+        int leftDiameter = leftPair.diameter;
+        int rightDiameter = rightPair.diameter;
+
+        /**
+         * 'dist' denotes the longest distance between deepest
+         * node of the left subtree and deepest node of the right subtree
+         */
+
+        int dist = leftPair.height + rightPair.height;
+
+        int diameter = Math.max(leftDiameter, Math.max(rightDiameter, dist));
+        int height = Math.max(leftPair.height, rightPair.height);
+
+        return new Pair(diameter, height);
+    }
+
+    public static int diameter(BinaryTreeNode<Integer> root) {
+        Pair pair = diameterHelper(root);
+        return pair.diameter;
+    }
+
     public static void main(String[] args) {
         // BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(1);
 
@@ -262,6 +291,8 @@ public class BinaryTreeUse {
         System.out.println("Tree : ");
         printTree(root);
         System.out.println("___________________ ");
+
+        System.out.println("Diameter : " + diameter(root));
 
     }
 }

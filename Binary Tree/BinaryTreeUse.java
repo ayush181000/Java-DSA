@@ -324,15 +324,59 @@ public class BinaryTreeUse {
         }
     }
 
+    public static BinaryTreeNode<Integer> buildTreeHelper(int[] preOrder, int preStart, int preEnd, int[] inOrder,
+            int inStart, int inEnd) {
+        if (preStart > preEnd || inStart > inEnd) {
+            return null;
+        }
+
+        int rootVal = preOrder[preStart];
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(rootVal);
+
+        // Find root element index from inOrder array
+        int k = 0;
+        for (int i = inStart; i <= inEnd; i++) {
+            if (rootVal == inOrder[i]) {
+                k = i;
+                break;
+            }
+        }
+
+        root.left = buildTreeHelper(preOrder, preStart + 1, (k - inStart), inOrder, inStart, k - 1);
+        root.right = buildTreeHelper(preOrder, preStart + (k - inStart), preEnd, inOrder, k + 1, inEnd);
+
+        return root;
+    }
+
+    public static BinaryTreeNode<Integer> buildTree(int[] preOrder, int[] inOrder) {
+        int n = preOrder.length;
+
+        int preStart = 0;
+        int preEnd = n - 1;
+        int inStart = 0;
+        int inEnd = n - 1;
+
+        return buildTreeHelper(preOrder, preStart, preEnd, inOrder, inStart, inEnd);
+    }
+
+    public static boolean searchBST(BinaryTreeNode<Integer> root, int val) {
+        if (root == null) {
+            return false;
+        }
+
+        if (root.data == val) {
+            return true;
+        }
+
+        if (root.data < val) {
+            return searchBST(root.right, val);
+        }
+
+        return searchBST(root.left, val);
+
+    }
+
     public static void main(String[] args) {
-        // BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(1);
-
-        // BinaryTreeNode<Integer> rootLeft = new BinaryTreeNode<Integer>(2);
-        // BinaryTreeNode<Integer> rootRight = new BinaryTreeNode<Integer>(3);
-
-        // root.left = rootLeft;
-        // root.right = rootRight;
-
         /**
          * recursion input
          */
@@ -361,7 +405,6 @@ public class BinaryTreeUse {
         // System.out.println("Tree printed at level K");
         // printTreeAtDepthK(root, 2);
 
-        //
         // changeToDepthTree(root);
 
         // BinaryTreeNode<Integer> newRoot = removeLeafNodes(root);
@@ -374,6 +417,14 @@ public class BinaryTreeUse {
         System.out.println("___________________ ");
 
         System.out.println("Diameter : " + diameter(root));
+
+        /**
+         * used to make tree from preorder and inorder traversal string
+         */
+        // int in[] = { 4, 2, 5, 1, 3 };
+        // int pre[] = { 1, 2, 4, 5, 3 };
+        // BinaryTreeNode<Integer> newRoot = buildTree(pre, in);
+        // printTree(newRoot);
 
     }
 }

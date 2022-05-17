@@ -471,6 +471,21 @@ public class BinaryTreeUse {
 
     }
 
+    public static boolean isBST3(BinaryTreeNode<Integer> root, int minRange, int maxRange) {
+        if (root == null) {
+            return true;
+        }
+
+        if (root.data < minRange || root.data > maxRange) {
+            return false;
+        }
+
+        boolean isLeftWithinRange = isBST3(root.left, minRange, root.data - 1);
+        boolean isRightWithinRange = isBST3(root.right, root.data, maxRange);
+
+        return isLeftWithinRange && isRightWithinRange;
+    }
+
     public static void main(String[] args) {
         /**
          * recursion input
@@ -528,8 +543,10 @@ public class BinaryTreeUse {
         BinaryTreeNode<Integer> newRoot = sortedArrayToBST(arr, arr.length);
         printTree(newRoot);
 
-        IsBSTReturn ans = isBST2(newRoot);
-        System.out.println(ans.min + " " + ans.max + " " + ans.isBST);
+        // IsBSTReturn ans = isBST2(newRoot);
+        // System.out.println(ans.min + " " + ans.max + " " + ans.isBST);
+
+        System.out.println(isBST3(newRoot, Integer.MIN_VALUE, Integer.MAX_VALUE));
 
     }
 }

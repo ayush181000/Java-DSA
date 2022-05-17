@@ -391,6 +391,23 @@ public class BinaryTreeUse {
         }
     }
 
+    public static BinaryTreeNode<Integer> SortedArrayToBSTHelper(int[] arr, int start, int end) {
+        if (start > end) {
+            return null;
+        }
+        int mid = start + (end - start) / 2;
+
+        BinaryTreeNode<Integer> temp = new BinaryTreeNode<Integer>(arr[mid]);
+        temp.left = SortedArrayToBSTHelper(arr, start, mid - 1);
+        temp.right = SortedArrayToBSTHelper(arr, mid + 1, end);
+        return temp;
+
+    }
+
+    public static BinaryTreeNode<Integer> sortedArrayToBST(int[] arr, int n) {
+        return SortedArrayToBSTHelper(arr, 0, n - 1);
+    }
+
     public static void main(String[] args) {
         /**
          * recursion input
@@ -440,6 +457,13 @@ public class BinaryTreeUse {
         // int pre[] = { 1, 2, 4, 5, 3 };
         // BinaryTreeNode<Integer> newRoot = buildTree(pre, in);
         // printTree(newRoot);
+
+        /**
+         * used to make binary tree from sorted array
+         */
+        int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+        BinaryTreeNode<Integer> newRoot = sortedArrayToBST(arr, arr.length);
+        printTree(newRoot);
 
     }
 }

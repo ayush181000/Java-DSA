@@ -408,6 +408,38 @@ public class BinaryTreeUse {
         return SortedArrayToBSTHelper(arr, 0, n - 1);
     }
 
+    public static boolean isBST(BinaryTreeNode<Integer> root) {
+        if (root == null) {
+            return true;
+        }
+
+        int leftMax = largestNode(root.left);
+        if (leftMax >= root.data) {
+            return false;
+        }
+
+        int rightMin = minimum(root.right);
+        if (rightMin < root.data) {
+            return false;
+        }
+
+        boolean isLeftBST = isBST(root.left);
+        boolean isRightBST = isBST(root.right);
+
+        return isLeftBST && isRightBST;
+
+    }
+
+    public static int minimum(BinaryTreeNode<Integer> root) {
+        if (root == null) {
+            return Integer.MAX_VALUE;
+        }
+        int leftMin = minimum(root.left);
+        int rightMin = minimum(root.right);
+        return Math.min(root.data, Math.min(leftMin, rightMin));
+
+    }
+
     public static void main(String[] args) {
         /**
          * recursion input
@@ -461,9 +493,9 @@ public class BinaryTreeUse {
         /**
          * used to make binary tree from sorted array
          */
-        int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
-        BinaryTreeNode<Integer> newRoot = sortedArrayToBST(arr, arr.length);
-        printTree(newRoot);
+        // int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
+        // BinaryTreeNode<Integer> newRoot = sortedArrayToBST(arr, arr.length);
+        // printTree(newRoot);
 
     }
 }

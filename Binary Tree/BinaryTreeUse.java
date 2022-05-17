@@ -241,10 +241,10 @@ public class BinaryTreeUse {
          * node of the left subtree and deepest node of the right subtree
          */
 
-        int dist = leftPair.height + rightPair.height;
+        int dist = leftPair.height + rightPair.height + 1;
 
         int diameter = Math.max(leftDiameter, Math.max(rightDiameter, dist));
-        int height = Math.max(leftPair.height, rightPair.height);
+        int height = Math.max(leftPair.height, rightPair.height) + 1;
 
         return new Pair(diameter, height);
     }
@@ -323,8 +323,6 @@ public class BinaryTreeUse {
             }
         }
     }
-
-    // TODO: diameter not working
 
     public static void main(String[] args) {
         // BinaryTreeNode<Integer> root = new BinaryTreeNode<Integer>(1);

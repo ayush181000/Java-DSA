@@ -1,5 +1,6 @@
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class BinaryTreeUse {
@@ -486,6 +487,33 @@ public class BinaryTreeUse {
         return isLeftWithinRange && isRightWithinRange;
     }
 
+    public static ArrayList<Integer> nodeToRootPath(BinaryTreeNode<Integer> root, int x) {
+        if (root == null) {
+            return null;
+        }
+
+        if (root.data == x) {
+            ArrayList<Integer> output = new ArrayList<>();
+            output.add(root.data);
+            return output;
+        }
+
+        ArrayList<Integer> leftOutput = nodeToRootPath(root.left, x);
+        if (leftOutput != null) {
+            leftOutput.add(root.data);
+            return leftOutput;
+        }
+
+        ArrayList<Integer> rightOutput = nodeToRootPath(root.right, x);
+        if (rightOutput != null) {
+            rightOutput.add(root.data);
+            return rightOutput;
+        }
+
+        return null;
+
+    }
+
     public static void main(String[] args) {
         /**
          * recursion input
@@ -546,7 +574,13 @@ public class BinaryTreeUse {
         // IsBSTReturn ans = isBST2(newRoot);
         // System.out.println(ans.min + " " + ans.max + " " + ans.isBST);
 
-        System.out.println(isBST3(newRoot, Integer.MIN_VALUE, Integer.MAX_VALUE));
+        // System.out.println(isBST3(newRoot, Integer.MIN_VALUE, Integer.MAX_VALUE));
+
+        System.out.println("Path : ");
+        ArrayList<Integer> path = nodeToRootPath(newRoot, 5);
+        for (int i : path) {
+            System.out.print(i + " ");
+        }
 
     }
 }

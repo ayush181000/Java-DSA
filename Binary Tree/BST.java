@@ -1,5 +1,3 @@
-// 14
-
 public class BST {
     private BinaryTreeNode<Integer> root;
     private int size;
@@ -55,20 +53,33 @@ public class BST {
             return null;
         }
 
+        // if data is on left side
         if (data < root.data) {
             root.left = remove(data, root.left);
             return root;
-        } else if (data > root.data) {
-            root.left = remove(data, root.left);
+        }
+        // if data is on right side
+        else if (data > root.data) {
+            root.right = remove(data, root.right);
             return root;
         } else {
+
+            // if root is found data
+
+            // zero children
             if (root.left == null && root.right == null) {
                 return null;
-            } else if (root.left == null) {
+            }
+
+            // one children
+            else if (root.left == null) {
                 return root.right;
             } else if (root.right == null) {
                 return root.left;
-            } else {
+            }
+
+            // both children are present
+            else {
                 BinaryTreeNode<Integer> minNode = root.right;
                 while (minNode.left != null) {
                     minNode = minNode.left;

@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 // link : https://www.codingninjas.com/codestudio/problems/total-unique-paths_1081470?source=youtube&campaign=striver_dp_videos&utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_dp_videos&leftPanelTab=0
@@ -13,13 +12,27 @@ public class UniquePaths {
 
 class Solution {
     public static int uniquePaths(int m, int n) {
-        int[][] dp = new int[m][n];
+        int[] prev = new int[n];
 
         for (int i = 0; i < m; i++) {
-            Arrays.fill(dp[i], -1);
+            int[] curr = new int[n];
+            for (int j = 0; j < n; j++) {
+                if (i == 0 && j == 0)
+                    curr[j] = 1;
+                else {
+                    int up = 0, left = 0;
+                    if (i > 0)
+                        up = prev[j];
+                    if (j > 0)
+                        left = curr[j - 1];
+                    curr[j] = up + left;
+                }
+            }
+            prev = curr;
         }
 
-        return helper(m - 1, n - 1, dp);
+        return prev[n - 1];
+        // return helper(m-1,n-1,dp);
     }
 
     public static int helper(int row, int col, int[][] dp) {

@@ -11,7 +11,7 @@ class Solution {
         for (int i = 0; i < n; i++) {
             dp[i][0] = true;
         }
-        // Arrays.sort(arr);
+
         dp[0][arr[0]] = true;
 
         for (int idx = 1; idx < n; idx++) {

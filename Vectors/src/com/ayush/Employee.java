@@ -1,4 +1,4 @@
-package com.ayush;
+package Vectors.src.com.ayush;
 
 import java.util.Objects;
 
@@ -44,8 +44,10 @@ public class Employee {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Employee employee = (Employee) o;
         return id == employee.id && firstName.equals(employee.firstName) && lastName.equals(employee.lastName);
     }

@@ -6,9 +6,30 @@ public class LongestIncreasingSubsequence {
 
 class Solution {
 
-    // tabulation 2
-    // with printing LIS
+    // binary search solution
+    // NOTE: cannot be used to get LIS itself . for that use reccurence or
+    // tabulation
     public static int longestIncreasingSubsequence(int arr[]) {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(arr[0]);
+
+        for (int i = 1; i < arr.length; i++) {
+            if (list.get(list.size() - 1) < arr[i])
+                list.add(arr[i]);
+            else {
+                // finding lower bound
+                int index = Arrays.binarySearch(list.toArray(), arr[i]);
+                if (index < 0) {
+                    index = Math.abs(index) - 1;
+                }
+                list.set(index, arr[i]);
+            }
+        }
+
+        return list.size();
+    }
+
+    public static int longestIncreasingSubsequence3(int arr[]) {
         int n = arr.length;
         int[] dp = new int[n];
         int[] hash = new int[n];
@@ -42,7 +63,6 @@ class Solution {
         return max;
     }
 
-    // tabulation from recursion
     public static int longestIncreasingSubsequence2(int arr[]) {
         int n = arr.length;
 
@@ -65,7 +85,6 @@ class Solution {
         // return f(0,-1,arr,n,dp);
     }
 
-    // recursion
     public static int f(int ind, int last, int[] arr, int n, int[][] dp) {
         if (ind == n)
             return 0;

@@ -16,7 +16,7 @@ class Node {
     }
 }
 
-class Solution {
+class Solution2 {
     // Function to detect cycle in an undirected graph.
 
     public boolean checkForCycleDFS(ArrayList<ArrayList<Integer>> adj, int s, int parent, boolean vis[]) {

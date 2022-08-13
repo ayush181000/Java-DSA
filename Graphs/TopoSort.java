@@ -8,7 +8,7 @@ public class TopoSort {
 
 // DFS TOPO SORT
 
-class Solution {
+class Solution3 {
     // Function to return list containing vertices in Topological order.
     public int[] topoSort(int N, ArrayList<ArrayList<Integer>> adj) {
         int topo[] = new int[N];

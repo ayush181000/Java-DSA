@@ -6,15 +6,7 @@ public class DetectCycleUndirected {
 
 }
 
-class Node {
-    int first;
-    int second;
 
-    public Node(int first, int second) {
-        this.first = first;
-        this.second = second;
-    }
-}
 
 class Solution2 {
     // Function to detect cycle in an undirected graph.
@@ -56,8 +48,8 @@ class Solution2 {
         vis[s] = true;
 
         while (!q.isEmpty()) {
-            int node = q.peek().first;
-            int par = q.peek().second;
+            int node = q.peek().getV();
+            int par = q.peek().getWeight();
             q.remove();
 
             for (Integer it : adj.get(node)) {
